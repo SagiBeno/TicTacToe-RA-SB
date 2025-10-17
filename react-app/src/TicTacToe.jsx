@@ -105,7 +105,7 @@ return (
             {[0,1,2].map(col => {
               const idx = [row, col];
               return <Fragment key={row + col / 10}>
-                  {board[row][col] != null ? <button className={`square, ${board[row][col] == "X" ? "playerX" : "playerO"}`}>{board[row][col]}</button> 
+                  {board[row][col] != null ? <button className={`square ${board[row][col] == "X" ? "playerX" : "playerO"}`}>{board[row][col]}</button> 
                       :
                       <button 
                         key={row + col / 10}
