@@ -5,10 +5,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css'; // with custom childish styles
 
 function TicTacToe() {
-  const [board, setBoard] = useState([
-    [0,0,0],
-    [0,0,0],
-    [0,0,0]]
+  const [board, setBoard] = useState(
+    [
+      [0, 1, 2],
+      [1.1, 1.2, 1.3],
+      [2.1, 2.2, 2.3]
+    ]
   );
   const [nextPlayer, setNextPlayer] = useState('X');
   const [winner, setWinner] = useState(null);
@@ -35,7 +37,11 @@ function TicTacToe() {
     console.log('handleClick idx: ', idx)
     //TODO - if (board[idx] || winner) return;
     const newBoard = board.slice()
-    console.log('newBoard: ', newBoard[idx[0], idx[1]])
+    console.log('newBoard: ',newBoard)
+
+    console.log('newBoard[row, col]: ', newBoard[idx[0], idx[1]])
+
+
    
     
     setBoard(newBoard);
