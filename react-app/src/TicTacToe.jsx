@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // npm install express cors react-toastify
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css'; // with custom childish styles
 
 function TicTacToe() {
-  const [board, setBoard] = useState([[0,0,0], [0,0,0], [0,0,0]]);
+  const [board, setBoard] = useState([
+    [0,0,0],
+    [0,0,0],
+    [0,0,0]]
+  );
   const [nextPlayer, setNextPlayer] = useState('X');
   const [winner, setWinner] = useState(null);
+
+  useEffect(() => {
+    console.log('Board changed:', board);
+  }, [board]); 
 
   const postResult = async (result) => {
     // TODO - implement backend POST
@@ -27,8 +35,8 @@ function TicTacToe() {
     console.log('handleClick idx: ', idx)
     //TODO - if (board[idx] || winner) return;
     const newBoard = board.slice()
-    console.log('handleClick newBoard: ', newBoard)
-    newBoard[idx] = 'X'; // TODO
+    console.log('newBoard: ', newBoard[idx[0], idx[1]])
+   
     
     setBoard(newBoard);
     setNextPlayer('O'); // TODO
