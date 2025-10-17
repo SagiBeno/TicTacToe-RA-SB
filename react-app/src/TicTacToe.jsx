@@ -14,7 +14,7 @@ function TicTacToe() {
 
   const [board, setBoard] = useState(emptyBoard);
   const [currentPlayer, setCurrentPlayer] = useState('X');
-  const [surrended, setSurrended] = useState(false);
+  const [gameEnded, setGameEnded] = useState(false);
   const [matchHistory, setMatchHistory] = useState([]);
 
   useEffect(() => {
@@ -71,7 +71,7 @@ function TicTacToe() {
   }
 
   const handleClick = (idx) => {
-    if(surrended) return;
+    if(gameEnded) return;
 
     const newBoard = board.slice()
 
@@ -81,6 +81,7 @@ function TicTacToe() {
     
     const win = calculateWinner(newBoard);
     if (win) {
+      setGameEnded(true)
       toast(`${currentPlayer} wins!`);
       postResult(`${currentPlayer} wins`);
       return;
@@ -97,7 +98,7 @@ function TicTacToe() {
   const handleRestart = e => {
     e.preventDefault()
 
-    if(surrended) setSurrended(false);
+    if(gameEnded) setGameEnded(false);
 
     setBoard(emptyBoard);
     setCurrentPlayer('X');
@@ -107,7 +108,7 @@ function TicTacToe() {
   const handleSurrender = e => {
     e.preventDefault();
 
-    setSurrended(true);
+    setGameEnded(true);
 
     toast(currentPlayer == 'X' ? 'X wins!' : 'O wins!');
     postResult(currentPlayer == 'X' ? 'X wins' : 'O wins');
