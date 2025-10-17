@@ -13,16 +13,14 @@ function TicTacToe() {
   ];
 
   const [board, setBoard] = useState(emptyBoard);
-  const [nextPlayer, setNextPlayer] = useState('X');
-  const [winner, setWinner] = useState(null);
+  const [currentPlayer, setCurrentPlayer] = useState('X');
+  const [surrended, setSurrended] = useState(false);
   const [matchHistory, setMatchHistory] = useState([]);
 
-  /*
   useEffect(() => {
-    console.log('Board changed:', board);
-  }, [board]); 
-  */
- 
+    getResults(); //get match history on startup
+  }, []); 
+  
   const postResult = async (result) => {
 
     await fetch('http://localhost:3333/api/result', {
@@ -42,7 +40,6 @@ function TicTacToe() {
     })
     .then(async res => {
       const data = await res.json();
-      console.log(data)
       setMatchHistory(data)
     })
     .catch(console.warn)
@@ -74,41 +71,47 @@ function TicTacToe() {
   }
 
   const handleClick = (idx) => {
+    if(surrended) return;
+
     const newBoard = board.slice()
 
-    newBoard[idx[0]][idx[1]] = nextPlayer;
-
-    console.log('New board: ', newBoard);
+    newBoard[idx[0]][idx[1]] = currentPlayer;
 
     setBoard(newBoard);
-    setNextPlayer(nextPlayer === 'X' ? 'O' : 'X');
-
+    
     const win = calculateWinner(newBoard);
     if (win) {
-      setWinner(nextPlayer);
-      toast(`${nextPlayer} wins!`);
-      postResult(`${nextPlayer} wins`);
+      toast(`${currentPlayer} wins!`);
+      postResult(`${currentPlayer} wins`);
+      return;
     } 
     else if (!newBoard.flat().includes(null)) {
       toast('Draw!');
       postResult('Draw');
+      return;
     }
+
+    setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
   };
 
   const handleRestart = e => {
     e.preventDefault()
+
+    if(surrended) setSurrended(false);
+
     setBoard(emptyBoard);
-    setNextPlayer('X');
-    setWinner(null);
+    setCurrentPlayer('X');
     toast('Game restarted!');
   };
 
-  const handleSurrender = () => {
-    if (!winner) {
-      setWinner(nextPlayer == 'X' ? 'O' : 'X');
-      toast(nextPlayer == 'X' ? 'O wins!' : 'X wins!');
-      postResult(nextPlayer == 'X' ? 'O wins' : 'X wins');
-    }
+  const handleSurrender = e => {
+    e.preventDefault();
+
+    setSurrended(true);
+
+    toast(currentPlayer == 'X' ? 'X wins!' : 'O wins!');
+    postResult(currentPlayer == 'X' ? 'X wins' : 'O wins');
+    
   };
 
 return (
