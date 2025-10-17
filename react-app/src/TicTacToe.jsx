@@ -5,10 +5,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css'; // with custom childish styles
 
 function TicTacToe() {
+
   const emptyBoard = [
-    [0,0,0],
-    [0,0,0],
-    [0,0,0]
+    [null,null,null],
+    [null,null,null],
+    [null,null,null]
   ];
 
   const [board, setBoard] = useState(emptyBoard);
@@ -76,6 +77,7 @@ return (
         [0,1,2].map(row => (
           <div className="board-row" key={row}>
             {[0,1,2].map(col => {
+              board[row,col] 
               const idx = [row, col] // TODO - recalculate button address index
               return (
                 <button 
@@ -83,7 +85,7 @@ return (
                   className="square" 
                   onClick={() => handleClick(idx)}
                 >
-                  {board?.idx} {/* TODO */}
+                  {board?.[row][col]}
                 </button>
               );
             })}
