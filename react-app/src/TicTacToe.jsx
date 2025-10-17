@@ -59,6 +59,7 @@ function TicTacToe() {
 
   const handleClick = (idx) => {
     const newBoard = board.slice()
+
     newBoard[idx[0]][idx[1]] = nextPlayer;
 
     console.log('New board: ', newBoard);
@@ -84,7 +85,6 @@ function TicTacToe() {
     setNextPlayer('X');
     setWinner(null);
     toast('Game restarted!');
-
   };
 
   const handleSurrender = () => {
