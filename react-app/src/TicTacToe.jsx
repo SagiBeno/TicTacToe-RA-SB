@@ -32,21 +32,15 @@ function TicTacToe() {
   };
   // TODO - implement backend GET: query previous match results
 
-  const calculateWinner = function(board) {
-    let win = false;
-
-    for (let i = 0; i < 3; i++) {}
-  }
+  const calculateWinner = function(board) {/* TODO - implement */}
 
   const handleClick = (idx) => {
     console.log('handleClick idx: ', idx)
     //TODO - if (board[idx] || winner) return;
     const newBoard = board.slice()
     newBoard[idx[0]][idx[1]] = nextPlayer;
-
     setBoard(newBoard);
-    setNextPlayer(nextPlayer === 'X' ? 'O' : 'X');
-
+    setNextPlayer('O'); // TODO
     const win = calculateWinner(newBoard);
     if (win) {
       setWinner(win);
@@ -85,10 +79,10 @@ return (
             {[0,1,2].map(col => {
               const idx = [row, col];
               return <>
-                {board[row][col] != null ? <button className={`square, ${board[row][col] == "X" ? "playerX" : "playerO"}`} key={row + col / 10}>{board[row][col]}</button> 
+                {board[row][col] != null ? <button className={`square ${board[row][col] == "X" ? "playerX" : "playerO"}`}>{board[row][col]}</button> 
                     :
                     <button 
-                      key={row + col / 10}
+                      key={col}
                       className="square" 
                       onClick={() => handleClick(idx)}
                     />
