@@ -15,13 +15,16 @@ function TicTacToe() {
   const [board, setBoard] = useState(emptyBoard);
   const [nextPlayer, setNextPlayer] = useState('X');
   const [winner, setWinner] = useState(null);
+  const [matchHistory, setMatchHistory] = useState([]);
 
+  /*
   useEffect(() => {
     console.log('Board changed:', board);
   }, [board]); 
-
+  */
+ 
   const postResult = async (result) => {
-    // TODO - implement backend POST
+
     await fetch('http://localhost:3333/api/result', {
       method: 'POST',
       headers: {
@@ -29,8 +32,21 @@ function TicTacToe() {
       },
       body: JSON.stringify({ result })
     });
+    getResults();
   };
-  // TODO - implement backend GET: query previous match results
+
+  const getResults = async (e) => {
+
+    await fetch('http://localhost:3333/api/results', {
+      method: 'GET'
+    })
+    .then(async res => {
+      const data = await res.json();
+      console.log(data)
+      setMatchHistory(data)
+    })
+    .catch(console.warn)
+  }
 
   const calculateWinner = function(board) {
     let win = false;
@@ -119,9 +135,25 @@ return (
         ))
       }
     </div>
+
     <div className="controls">
       <button onClick={handleRestart}>Restart</button>
       <button onClick={handleSurrender}>Surrender</button>
+    </div>
+
+    <div className="matchHistory">
+      {
+        matchHistory.length > 0 ? 
+          <ol>
+            {
+              matchHistory.map((data, key) => (
+                <li key={key}>{data}</li>
+              ))
+            }
+          </ol>
+          :
+          ""
+      }
     </div>
     <ToastContainer position="top-center" />
   </div>

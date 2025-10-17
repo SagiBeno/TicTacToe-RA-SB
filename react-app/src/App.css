@@ -64,23 +64,28 @@ h1 {
   grid-template-columns: repeat(3, 80px);
   gap: 16px;
   margin-bottom: 30px;
-  padding-right: 20px;
 }
 
 .square {
   background: #fffde7;
   border: 2px solid #ffb300;
-  /* TODO - add border radius */
+  border-radius: 20px;
   width: 80px;
   height: 80px;
   font-size: 2.5rem;
-  color: #4caf50;
+  padding: 0px;
   cursor: pointer;
-  /* TODO - add some shadow */
+  box-shadow: 3px 3px 3px #858585;
   transition: background 0.2s, color 0.2s, filter 0.15s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .square:hover {
   background: #ffe0b2;
+  border: 3px solid #c98d02;
+  animation: pulse 1.5s infinite;
   filter: brightness(1.1);
 }
 
@@ -111,4 +116,16 @@ h1 {
 
 .playerO {
   color: red;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
