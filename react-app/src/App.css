@@ -104,3 +104,11 @@ h1 {
   background: #90caf9;
   color: #1e6091;
 }
+
+.playerX {
+  color: #4caf50;
+}
+
+.playerO {
+  color: red;
+}
