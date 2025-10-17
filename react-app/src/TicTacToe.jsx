@@ -37,13 +37,11 @@ function TicTacToe() {
     console.log('handleClick idx: ', idx)
     //TODO - if (board[idx] || winner) return;
     const newBoard = board.slice()
-    console.log('newBoard: ',newBoard)
 
-    console.log('newBoard[row, col]: ', newBoard[idx[0], idx[1]])
+    newBoard[idx[0]][idx[1]] = nextPlayer;
 
+    console.log('newBoard[row, col]: ', newBoard[idx[0]][idx[1]]);
 
-   
-    
     setBoard(newBoard);
     setNextPlayer('O'); // TODO
     const win = calculateWinner(newBoard);
@@ -82,16 +80,17 @@ return (
         [0,1,2].map(row => (
           <div className="board-row" key={row}>
             {[0,1,2].map(col => {
-              const idx = [row, col] // TODO - recalculate button address index
-              return (
-                <button 
-                  key={col}
-                  className="square" 
-                  onClick={() => handleClick(idx)}
-                >
-                  {board?.idx} {/* TODO */}
-                </button>
-              );
+              const idx = [row, col];
+              return <>
+                {board[row][col] != 0 ? <button>{board[row][col]}</button> 
+                    :
+                    <button 
+                      key={col}
+                      className="square" 
+                      onClick={() => handleClick(idx)}
+                    />
+                  }
+                </>;
             })}
           </div>
         ))
