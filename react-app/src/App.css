@@ -33,10 +33,6 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
-
 .read-the-docs {
   color: #888;
 }
@@ -52,6 +48,7 @@
   min-height: 80vh;
   padding-top: 40px;
   font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+
 }
 
 h1 {
@@ -67,6 +64,7 @@ h1 {
   grid-template-columns: repeat(3, 80px);
   gap: 16px;
   margin-bottom: 30px;
+  padding-right: 20px;
 }
 
 .square {

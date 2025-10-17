@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-// TODO - npm install express cors react-toastify
-//import { toast, ToastContainer } from 'react-toastify';
-//import 'react-toastify/dist/ReactToastify.css';
+// npm install express cors react-toastify
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css'; // with custom childish styles
 
 function TicTacToe() {
@@ -33,11 +33,11 @@ function TicTacToe() {
     const win = calculateWinner(newBoard);
     if (win) {
       setWinner(win);
-      //toast(`${win} wins!`);
-      //postResult(`${win} wins`);
+      toast(`${win} wins!`);
+      postResult(`${win} wins`);
     } else if (!newBoard.includes(null)) {
-      //toast('Draw!');
-      //postResult('Draw');
+      toast('Draw!');
+      postResult('Draw');
     }
   };
 
@@ -74,7 +74,7 @@ return (
       <button >Restart</button>
       <button >Surrender</button>
     </div>
-    {/*<ToastContainer position="top-center" />*/}
+    <ToastContainer position="top-center" />
   </div>
 );
 }
