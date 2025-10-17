@@ -1,0 +1,108 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+
+
+.gameContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #e0f7fa;
+  min-height: 80vh;
+  padding-top: 40px;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+}
+
+h1 {
+  color: #ff9800;
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  letter-spacing: 3px;
+}
+
+.grid {
+  display: grid;
+  grid-template-rows: repeat(3, 80px);
+  grid-template-columns: repeat(3, 80px);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.square {
+  background: #fffde7;
+  border: 2px solid #ffb300;
+  /* TODO - add border radius */
+  width: 80px;
+  height: 80px;
+  font-size: 2.5rem;
+  color: #4caf50;
+  cursor: pointer;
+  /* TODO - add some shadow */
+  transition: background 0.2s, color 0.2s, filter 0.15s;
+}
+.square:hover {
+  background: #ffe0b2;
+  filter: brightness(1.1);
+}
+
+.board-row {
+  display: contents; /* Allows CSS grid layout */
+}
+
+.controls button {
+  margin: 0 8px;
+  padding: 12px 28px;
+  background: #bbdefb;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  color: #333;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.controls button:hover {
+  background: #90caf9;
+  color: #1e6091;
+}
