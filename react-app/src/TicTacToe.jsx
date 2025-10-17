@@ -155,7 +155,7 @@ return (
             }
           </ol>
           :
-          ""
+          "No match history"
       }
     </div>
     <ToastContainer position="top-center" />
