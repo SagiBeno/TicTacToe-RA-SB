@@ -5,11 +5,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css'; // with custom childish styles
 
 function TicTacToe() {
-  const [board, setBoard] = useState([
+  const emptyBoard = [
     [0,0,0],
     [0,0,0],
-    [0,0,0]]
-  );
+    [0,0,0]
+  ];
+
+  const [board, setBoard] = useState(emptyBoard);
   const [nextPlayer, setNextPlayer] = useState('X');
   const [winner, setWinner] = useState(null);
 
@@ -19,7 +21,7 @@ function TicTacToe() {
 
   const postResult = async (result) => {
     // TODO - implement backend POST
-    await fetch('/api/result', {
+    await fetch('http://localhost:3333/api/result', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -51,10 +53,21 @@ function TicTacToe() {
     }
   };
 
-  const handleRestart = () => {/* TODO */};
+  const handleRestart = e => {
+    e.preventDefault()
+    setBoard(emptyBoard);
+    setNextPlayer('X');
+    setWinner(null);
+    toast('Game restarted!');
+
+  };
 
   const handleSurrender = () => {
-    if (!winner) {/* TODO */}
+    if (!winner) {
+      setWinner(nextPlayer == 'X' ? 'O' : 'X');
+      toast(nextPlayer == 'X' ? 'O wins!' : 'X wins!');
+      postResult(nextPlayer == 'X' ? 'O wins' : 'X wins');
+    }
   };
 
 return (
@@ -81,8 +94,8 @@ return (
       }
     </div>
     <div className="controls">
-      <button >Restart</button>
-      <button >Surrender</button>
+      <button onClick={handleRestart}>Restart</button>
+      <button onClick={handleSurrender}>Surrender</button>
     </div>
     <ToastContainer position="top-center" />
   </div>
