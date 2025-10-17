@@ -37,7 +37,11 @@ function TicTacToe() {
     console.log('handleClick idx: ', idx)
     //TODO - if (board[idx] || winner) return;
     const newBoard = board.slice()
-    console.log('newBoard: ', newBoard[idx[0], idx[1]])
+    console.log('newBoard: ',newBoard)
+
+    console.log('newBoard[row, col]: ', newBoard[idx[0], idx[1]])
+
+
    
     
     setBoard(newBoard);
