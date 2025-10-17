@@ -77,17 +77,17 @@ return (
         [0,1,2].map(row => (
           <div className="board-row" key={row}>
             {[0,1,2].map(col => {
-              board[row,col] 
-              const idx = [row, col] // TODO - recalculate button address index
-              return (
-                <button 
-                  key={col}
-                  className="square" 
-                  onClick={() => handleClick(idx)}
-                >
-                  {board?.[row][col]}
-                </button>
-              );
+              const idx = [row, col];
+              return <>
+                {board[row][col] != 0 ? <button>{board[row][col]}</button> 
+                    :
+                    <button 
+                      key={col}
+                      className="square" 
+                      onClick={() => handleClick(idx)}
+                    />
+                  }
+                </>;
             })}
           </div>
         ))
