@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // npm install express cors react-toastify
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css'; // with custom childish styles
 
 function TicTacToe() {
-  const [board, setBoard] = useState(Array(9).fill(null));
+  const emptyBoard = [
+    [0,0,0],
+    [0,0,0],
+    [0,0,0]
+  ];
+
+  const [board, setBoard] = useState(emptyBoard);
   const [nextPlayer, setNextPlayer] = useState('X');
   const [winner, setWinner] = useState(null);
 
+  useEffect(() => {
+    console.log('Board changed:', board);
+  }, [board]); 
+
   const postResult = async (result) => {
     // TODO - implement backend POST
-    await fetch('/api/result', {
+    await fetch('http://localhost:3333/api/result', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -24,9 +34,11 @@ function TicTacToe() {
   const calculateWinner = function(board) {/* TODO - implement */}
 
   const handleClick = (idx) => {
+    console.log('handleClick idx: ', idx)
     //TODO - if (board[idx] || winner) return;
-    const newBoard = board.slice();
-    newBoard[idx] = 'X'; // TODO
+    const newBoard = board.slice()
+    console.log('newBoard: ', newBoard[idx[0], idx[1]])
+   
     
     setBoard(newBoard);
     setNextPlayer('O'); // TODO
@@ -41,10 +53,21 @@ function TicTacToe() {
     }
   };
 
-  const handleRestart = () => {/* TODO */};
+  const handleRestart = e => {
+    e.preventDefault()
+    setBoard(emptyBoard);
+    setNextPlayer('X');
+    setWinner(null);
+    toast('Game restarted!');
+
+  };
 
   const handleSurrender = () => {
-    if (!winner) {/* TODO */}
+    if (!winner) {
+      setWinner(nextPlayer == 'X' ? 'O' : 'X');
+      toast(nextPlayer == 'X' ? 'O wins!' : 'X wins!');
+      postResult(nextPlayer == 'X' ? 'O wins' : 'X wins');
+    }
   };
 
 return (
@@ -55,12 +78,12 @@ return (
         [0,1,2].map(row => (
           <div className="board-row" key={row}>
             {[0,1,2].map(col => {
-              const idx = row * col // TODO - recalculate button address index
+              const idx = [row, col] // TODO - recalculate button address index
               return (
                 <button 
-                  key="idx" 
+                  key={col}
                   className="square" 
-                  
+                  onClick={() => handleClick(idx)}
                 >
                   {board?.idx} {/* TODO */}
                 </button>
@@ -71,8 +94,8 @@ return (
       }
     </div>
     <div className="controls">
-      <button >Restart</button>
-      <button >Surrender</button>
+      <button onClick={handleRestart}>Restart</button>
+      <button onClick={handleSurrender}>Surrender</button>
     </div>
     <ToastContainer position="top-center" />
   </div>
