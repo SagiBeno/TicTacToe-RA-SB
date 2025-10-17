@@ -85,7 +85,7 @@ return (
             {[0,1,2].map(col => {
               const idx = [row, col];
               return <>
-                {board[row][col] != null ? <button key={row + col / 10} className="square">{board[row][col]}</button> 
+                {board[row][col] != null ? <button className={`square, ${board[row][col] == "X" ? "playerX" : "playerO"}`} key={row + col / 10}>{board[row][col]}</button> 
                     :
                     <button 
                       key={row + col / 10}
