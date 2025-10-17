@@ -32,15 +32,24 @@ function TicTacToe() {
   };
   // TODO - implement backend GET: query previous match results
 
-  const calculateWinner = function(board) {/* TODO - implement */}
+  const calculateWinner = function(playBoard) {
+    
+  }
 
   const handleClick = (idx) => {
     console.log('handleClick idx: ', idx)
-    //TODO - if (board[idx] || winner) return;
+    if (board[idx[0]][idx[1]] || winner) return;
     const newBoard = board.slice()
+
     newBoard[idx[0]][idx[1]] = nextPlayer;
     setBoard(newBoard);
-    setNextPlayer('O'); // TODO
+
+    if (nextPlayer == "X") {
+      setNextPlayer('O')
+    } else {
+      setNextPlayer('X')
+    }
+
     const win = calculateWinner(newBoard);
     if (win) {
       setWinner(win);
@@ -58,7 +67,6 @@ function TicTacToe() {
     setNextPlayer('X');
     setWinner(null);
     toast('Game restarted!');
-
   };
 
   const handleSurrender = () => {
